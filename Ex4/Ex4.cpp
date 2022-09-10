@@ -103,6 +103,22 @@ void sinus() {
 	_getch();
 }
 
+void sinuscmd() {
+	float x;
+	HDC hdc = GetDC(GetConsoleWindow());
+	float h = M_PI / 180;
+	SelectObject(hdc, GetStockObject(WHITE_PEN));
+	MoveToEx(hdc, 0, 360, NULL);
+	LineTo(hdc, 2000, 360);
+	MoveToEx(hdc, 720, 0, NULL);
+	LineTo(hdc, 720, 1000);
+	for (x = 0.0f; x <= 2000.0f; x += 0.01f)
+	{
+		MoveToEx(hdc, x, -100 * sin(x * h) + 360, NULL);
+		LineTo(hdc, x, -100 * sin(x * h) + 361);
+	}
+}
+
 void file() {
 	std::ofstream f1;
 	std::ifstream f2;
@@ -128,6 +144,6 @@ void file() {
 
 int main() {
 	setlocale(LC_ALL, "");
-	sinus();
+	sinuscmd();
 	return 0;
 }
